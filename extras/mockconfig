@@ -1,0 +1,87 @@
+config_opts['root'] = 'amzn-latest-x86_64'
+config_opts['basedir'] = '/var/lib/mock'
+config_opts['target_arch'] = 'x86_64'
+config_opts['chroothome'] = '/builddir'
+
+# Note: `buildsys-macros` is not included here
+config_opts['chroot_setup_cmd'] = 'install bash bzip2 coreutils chkconfig cpio diffutils findutils gawk gcc gcc-c++ grep gzip info make patch rpm-build sed shadow-utils system-rpm-config tar unzip util-linux-ng which xz yum'
+
+# Looks like some packages have tests that require network access
+config_opts['use_host_resolv'] = True
+
+# `nss` package takes almost 4 hours. So we give set to 4 hours 30 minutes
+config_opts['rpmbuild_timeout'] = 16200
+
+# `cache_topdir` is not set
+
+config_opts['legal_host_arches'] = ('x86_64',)
+
+# `extra_chroot_dirs` is not set
+
+config_opts['yum.conf'] = """
+[main]
+cachedir=/var/cache/yum
+debuglevel=1
+reposdir=/dev/null
+logfile=/var/log/yum.log
+retries=20
+obsoletes=1
+gpgcheck=0
+assumeyes=1
+syslog_ident=mock
+syslog_device=
+
+# repos
+[amzn-main]
+name=amzn-main-Base
+enabled=1
+mirrorlist=http://repo.us-west-2.amazonaws.com/latest/main/mirror.list
+failovermethod=priority
+gpgkey=file:///etc/pki/mock/RPM-GPG-KEY-amazon-ga
+gpgcheck=1
+
+[amzn-updates]
+name=amzn-updates-Base
+enabled=1
+mirrorlist=http://repo.us-west-2.amazonaws.com/latest/updates/mirror.list
+failovermethod=priority
+gpgkey=file:///etc/pki/mock/RPM-GPG-KEY-amazon-ga
+gpgcheck=1
+"""
+
+# AL/LL doesn't come with `ccache` package
+config_opts['plugin_conf']['ccache_enable'] = False
+config_opts['plugin_conf']['root_cache_enable'] = True
+config_opts['plugin_conf']['yum_cache_enable'] = True
+
+# `%_topdir` and `%_rpmfilename` is different from the defaults
+config_opts['macros']['%_topdir'] = '/builddir/build'
+config_opts['macros']['%_rpmfilename'] = '%%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm'
+
+config_opts['macros']['%packager'] = 'Lambda Linux Build System <https://lambda-linux.io/>'
+config_opts['macros']['%dist'] = '.ll1'
+config_opts['macros']['%vendor'] = 'Lambda Linux Project'
+config_opts['macros']['%distribution'] = 'Lambda Linux'
+
+# in order to eliminate including `system-release` in mock buildroot
+config_opts['macros']['%amzn'] = '1'
+config_opts['macros']['%amzn1'] = '1'
+config_opts['macros']['%_without_X11'] = '1'
+config_opts['macros']['%_without_gcj_support'] = '1'
+
+# Check `rpaths` is to ensure that we are not using non-standard `RPATH` in
+# our builds. This could happen when integrating non-RHEL, Fedora packages.
+# 0x0008 needed for java
+config_opts['macros']['%__arch_install_post'] = 'QA_RPATHS=$[ 0x0001|0x0008|0x0010 ] /usr/lib/rpm/check-rpaths /usr/lib/rpm/check-buildroot'
+
+# Lambda Linux settings
+config_opts['macros']['%lambda'] = '1'
+config_opts['macros']['%_host'] = '%{_host_cpu}-redhat-%{_host_os}-gnu'
+
+# adjust as appropriate
+config_opts['macros']['%_smp_mflags'] = '-j2'
+
+config_opts['macros']['%_hardened_build'] = '1'
+
+# git settings
+config_opts['scm_opts']['git_get'] = 'git clone SCM_BRN /home/ll-user/mock-builder-wip/build-git-repo/SCM_PKG.git SCM_PKG'
