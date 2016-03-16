@@ -1,0 +1,5 @@
+build-artifacts/
+build-git-repo/
+build-work/
+git-blobs/
+git-repo/
