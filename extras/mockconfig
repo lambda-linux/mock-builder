@@ -84,4 +84,4 @@ config_opts['macros']['%_smp_mflags'] = '-j2'
 config_opts['macros']['%_hardened_build'] = '1'
 
 # git settings
-config_opts['scm_opts']['git_get'] = 'git clone SCM_BRN /home/ll-user/mock-builder-wip/build-git-repo/SCM_PKG.git SCM_PKG'
+config_opts['scm_opts']['git_get'] = 'git clone SCM_BRN /home/ll-user/mock-builder/build-git-repo/SCM_PKG.git SCM_PKG'

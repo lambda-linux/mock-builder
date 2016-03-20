@@ -1,10 +1,10 @@
 # repo name - PACKAGE
 
-cd /home/ll-user/mock-builder-wip/git-repo
+cd /home/ll-user/mock-builder/git-repo
 git init --bare PACKAGE.git
 
-cd /home/ll-user/mock-builder-wip/build-git-repo
+cd /home/ll-user/mock-builder/build-git-repo
 git clone --bare ../git-repo/PACKAGE.git
 
-cd /home/ll-user/mock-builder-wip/build-work
+cd /home/ll-user/mock-builder/build-work
 git clone ../build-git-repo/PACKAGE.git

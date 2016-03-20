@@ -26,11 +26,11 @@ RUN \
   rm -f /tmp/docker-build/epll-release-2015.09-1.1.ll1.noarch.rpm && \
   \
   # setup symbolic link
-  ln -s /home/ll-user/mock-builder-wip/git-blobs /tmp/git-blobs.lambda-linux.io
+  ln -s /home/ll-user/mock-builder/git-blobs /tmp/git-blobs.lambda-linux.io
 
 COPY [ \
   "./extras/mockconfig", \
   "/etc/mock/default.cfg" \
 ]
 
-VOLUME ["/home/ll-user/mock-builder-wip"]
+VOLUME ["/home/ll-user/mock-builder"]
