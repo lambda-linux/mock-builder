@@ -2,7 +2,6 @@ FROM lambdalinux/baseimage-amzn:2016.03-001
 
 CMD ["/sbin/my_init"]
 
-VOLUME ["/tmp/docker-build"]
 COPY [ \
   "./extras/RPM-GPG-KEY-lambda-epll", \
   "./extras/epll-release-2015.09-1.1.ll1.noarch.rpm", \
@@ -32,5 +31,3 @@ COPY [ \
   "./extras/mockconfig", \
   "/etc/mock/default.cfg" \
 ]
-
-VOLUME ["/home/ll-user/mock-builder"]
