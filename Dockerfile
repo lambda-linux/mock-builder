@@ -5,6 +5,7 @@ CMD ["/sbin/my_init"]
 COPY [ \
   "./extras/RPM-GPG-KEY-lambda-epll", \
   "./extras/epll-release-2015.09-1.1.ll1.noarch.rpm", \
+  "./extras/mockconfig", \
   "/tmp/docker-build/" \
 ]
 
@@ -25,9 +26,7 @@ RUN \
   rm -f /tmp/docker-build/epll-release-2015.09-1.1.ll1.noarch.rpm && \
   \
   # setup symbolic link
-  ln -s /home/ll-user/mock-builder/git-blobs /tmp/git-blobs.lambda-linux.io
-
-COPY [ \
-  "./extras/mockconfig", \
-  "/etc/mock/default.cfg" \
-]
+  ln -s /home/ll-user/mock-builder/git-blobs /tmp/git-blobs.lambda-linux.io && \
+  \
+  # copy mock configuration file
+  cp /tmp/docker-build/mockconfig /etc/mock/default.cfg
