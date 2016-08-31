@@ -1,1 +1,2 @@
 export PATH=/home/ll-user/mock-builder/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+export TERM=xterm-256color
