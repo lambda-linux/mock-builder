@@ -29,9 +29,7 @@ To build package
 ```
 [ll-user@ll-builder-1] ~ $ mock --buildsrpm --scm-enable --scm-option package=<package_name> --scm-option branch=<branch_name>
 
-[ll-user@ll-builder-1] ~ $ cd ~/mock-builder/builddir/amzn/build/SOURCES/
-[ll-user@ll-builder-1] ~/mock-builder/builddir/amzn/build/SOURCES $ git fat init; git fat pull; cd ~/mock-builder/
-[ll-user@ll-builder-1] ~/mock-builder $ mock --shell "chown -R mockbuild:mockbuild /builddir/build/SOURCES"
+[ll-user@ll-builder-1] ~ $ cd ~/mock-builder/builddir/amzn/build/SOURCES/; git fat init; git fat pull; cd ~/mock-builder/; mock --shell "chown -R mockbuild:mockbuild /builddir/build/SOURCES"
 
 [ll-user@ll-builder-1] ~/mock-builder $ mock --rebuild <srpm_package>
 [ll-user@ll-builder-1] ~/mock-builder $ mock --no-clean --rebuild <srpm_package>
