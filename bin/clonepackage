@@ -1,0 +1,7 @@
+# repo name - PACKAGE
+
+cd /home/ll-user/mock-builder/build-git-repo
+git clone --bare ../git-repo/PACKAGE.git
+
+cd /home/ll-user/mock-builder/build-work
+git clone ../build-git-repo/PACKAGE.git
