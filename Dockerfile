@@ -4,7 +4,7 @@ CMD ["/sbin/my_init"]
 
 COPY [ \
   "./extras/RPM-GPG-KEY-lambda-epll", \
-  "./extras/epll-release-2016.03-1.1.ll1.noarch.rpm", \
+  "./extras/epll-release-2016.09-1.1.ll1.noarch.rpm", \
   "./extras/etc-mock-default.cfg", \
   "/tmp/docker-build/" \
 ]
@@ -20,7 +20,7 @@ RUN \
   yum install vim && \
   yum install which && \
   rpm --import /tmp/docker-build/RPM-GPG-KEY-lambda-epll && \
-  yum install /tmp/docker-build/epll-release-2016.03-1.1.ll1.noarch.rpm && \
+  yum install /tmp/docker-build/epll-release-2016.09-1.1.ll1.noarch.rpm && \
   yum -y --enablerepo=epll install mock mock-scm && \
   \
   # setup symbolic link
