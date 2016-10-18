@@ -21,7 +21,7 @@ $ docker run --rm -h ll-builder-1.build --privileged=true -t -v `pwd`:/home/ll-u
 Once inside the container, set the `mock` environment
 
 ```
-[ll-user@ll-builder-1] ~ $ source ~/mock-builder/bin/setpath
+[ll-user@ll-builder-1] ~ $ source ~/mock-builder/bin/setenv
 ```
 
 To build package
