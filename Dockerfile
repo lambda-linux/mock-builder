@@ -1,4 +1,4 @@
-FROM baseimage-amzn:2016.03-003
+FROM baseimage-amzn:2016.09-000
 
 CMD ["/sbin/my_init"]
 
