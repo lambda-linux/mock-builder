@@ -3,8 +3,6 @@ FROM baseimage-amzn:2016.09-000
 CMD ["/sbin/my_init"]
 
 COPY [ \
-  "./extras/RPM-GPG-KEY-lambda-epll", \
-  "./extras/epll-release-2016.09-1.1.ll1.noarch.rpm", \
   "./extras/etc-mock-default.cfg", \
   "/tmp/docker-build/" \
 ]
@@ -19,8 +17,11 @@ RUN \
   yum install tree && \
   yum install vim && \
   yum install which && \
+  # setup epll repository
+  curl -X GET -o /tmp/docker-build/RPM-GPG-KEY-lambda-epll https://lambda-linux.io/RPM-GPG-KEY-lambda-epll && \
   rpm --import /tmp/docker-build/RPM-GPG-KEY-lambda-epll && \
-  yum install /tmp/docker-build/epll-release-2016.09-1.1.ll1.noarch.rpm && \
+  curl -X GET -o /tmp/docker-build/epll-release-2016.09-1.2.ll1.noarch.rpm https://lambda-linux.io/epll-release-2016.09-1.2.ll1.noarch.rpm && \
+  yum install /tmp/docker-build/epll-release-2016.09-1.2.ll1.noarch.rpm && \
   yum -y --enablerepo=epll install mock mock-scm && \
   \
   # setup symbolic link
