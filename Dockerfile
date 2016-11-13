@@ -4,6 +4,7 @@ CMD ["/sbin/my_init"]
 
 COPY [ \
   "./extras/etc-mock-default.cfg", \
+  "./extras/etc-sudoers.d-docker", \
   "/tmp/docker-build/" \
 ]
 
@@ -29,5 +30,11 @@ RUN \
   \
   # copy mock configuration file
   cp /tmp/docker-build/etc-mock-default.cfg /etc/mock/default.cfg && \
+  \
+  # setup sudo
+  usermod -a -G wheel ll-user && \
+  cp /tmp/docker-build/etc-sudoers.d-docker /etc/sudoers.d/docker && \
+  chmod 440 /etc/sudoers.d/docker && \
+  \
   # cleanup
   rm -rf /tmp/docker-build
