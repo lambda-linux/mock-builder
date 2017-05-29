@@ -1,4 +1,4 @@
-FROM lambdalinux/baseimage-amzn:2016.09-000
+FROM lambdalinux/baseimage-amzn:2017.03-001
 
 CMD ["/sbin/my_init"]
 
@@ -21,8 +21,8 @@ RUN \
   # setup epll repository
   curl -X GET -o /tmp/docker-build/RPM-GPG-KEY-lambda-epll https://lambda-linux.io/RPM-GPG-KEY-lambda-epll && \
   rpm --import /tmp/docker-build/RPM-GPG-KEY-lambda-epll && \
-  curl -X GET -o /tmp/docker-build/epll-release-2016.09-1.2.ll1.noarch.rpm https://lambda-linux.io/epll-release-2016.09-1.2.ll1.noarch.rpm && \
-  yum install /tmp/docker-build/epll-release-2016.09-1.2.ll1.noarch.rpm && \
+  curl -X GET -o /tmp/docker-build/epll-release-2017.03-1.2.ll1.noarch.rpm https://lambda-linux.io/epll-release-2017.03-1.2.ll1.noarch.rpm && \
+  yum install /tmp/docker-build/epll-release-2017.03-1.2.ll1.noarch.rpm && \
   yum -y --enablerepo=epll install mock mock-scm && \
   \
   # setup symbolic link
