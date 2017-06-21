@@ -1,7 +1,16 @@
-# repo name - PACKAGE
+#!/bin/bash
+
+set -e
+
+if [ -z "${1}" ]; then
+    echo "package name not specified"
+    exit 1
+fi
+
+package="${1}.git"
 
 cd /home/ll-user/mock-builder/build-git-repo
-git clone --bare ../git-repo/PACKAGE.git
+git clone --bare ../git-repo/${package}
 
 cd /home/ll-user/mock-builder/build-work
-git clone ../build-git-repo/PACKAGE.git
+git clone ../build-git-repo/${package}
